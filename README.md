@@ -85,7 +85,7 @@ python3 manage.py runserver
 
 #### Документация к API с примерами запросов/ответов:
 
-Подробная докeментация доступна по url:
+Подробная документация доступна по url:
 ```
 http://<your_host>/redoc/
 http://<your_host>/swagger/
