@@ -1,51 +1,48 @@
-### Используя DRF (Django Rest Framework) разработать REST-сервис для управления виртуальными серверами (VPS).
+## Добро пожаловать в проект VPS manager
+Это Rest API приложение на фреймоворке DRF, реализованное в рамках тестового задания.
 
-#### Объект VPS
+Дополнительно реализованы:
 
-• uid - идентификатор
+- управление пользователями, аутентификация, авторизация с использованием
+[Djoser](https://djoser.readthedocs.io/en/latest/getting_started.html) и
+[JWT](https://django-rest-framework-simplejwt.readthedocs.io/).
+- Расширение для динамической документации API
+[drf-yasg](https://drf-yasg.readthedocs.io/en/stable/)
 
-• cpu - количество ядер
+#### Задание
 
-• ram - объем RAM
+Используя DRF (Django Rest Framework) разработать REST-сервис для управления виртуальными серверами (VPS).
 
-• hdd - объем HDD
+##### Объект VPS
 
-• status - статус сервера (started, blocked, stopped)
+- uid - идентификатор
+- cpu - количество ядер
+- ram - объем RAM
+- hdd - объем HDD
+- status - статус сервера (started, blocked, stopped)
 
-### API поддерживает операции
+##### API поддерживает операции
 
-• создать VPS
-
-• получить VPS по uid
-
-• получить список VPS с возможностью фильтрации по параметрам
-
-• перевести VPS в другой статус
-
-----
-## Добро пожаловать в проект YATUBE
-Это Rest API приложение для ведения блогов на фреймоворке DRF.
-Проект решает задачу создания блогерской вебплатформы, с возможностью подключения:
-- web-клиентов
-- мобильных приложений
-- любых других видов клиентов, подерживающих работу с RestAPI 
-
-### Технологии
+- создать VPS
+- получить VPS по uid
+- получить список VPS с возможностью фильтрации по параметрам
+- перевести VPS в другой статус
+#### Технологии
 - [Django 2.2.16](https://docs.djangoproject.com/en/4.0/releases/2.2.16/)
 - [DRF 3.12.4](https://www.django-rest-framework.org/community/release-notes/)
 
-Подробнее в [requirements.txt](https://github.com/apfirsov/api_final_yatube/blob/master/requirements.txt)
+Подробнее в [requirements.txt](https://github.com/apfirsov/vps_manager/blob/main/requirements.txt)
 
-### Как запустить проект:
+#### Как запустить проект:
 
 Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone git@github.com:apfirsov/api_final_yatube.git
+git clone git@github.com:apfirsov/vps_manager.git
 ```
 
 ```
-cd api_final_yatube
+cd vps_manager
 ```
 
 Cоздать и активировать виртуальное окружение:
@@ -68,6 +65,12 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+Перейти в головной каталог:
+
+```
+cd vps_manager
+```
+
 Выполнить миграции:
 
 ```
@@ -85,57 +88,51 @@ python3 manage.py runserver
 Подробная докeментация доступна по url:
 ```
 http://<your_host>/redoc/
+http://<your_host>/swagger/
 ```
 
-Пример получения постов:
+Пример получения списка VPS:
 ```
-GET /api/v1/posts/
+GET /api/vps/?cpu=4&status=started
 ```
 ```
 {
-  "count": 123,
-  "next": "http://api.example.org/accounts/?offset=400&limit=100",
-  "previous": "http://api.example.org/accounts/?offset=200&limit=100",
+  "count": 1,
+  "next": "http://example.com",
+  "previous": "http://example.com",
   "results": [
     {
-      "id": 0,
-      "author": "string",
-      "text": "string",
-      "pub_date": "2021-10-14T20:41:29.648Z",
-      "image": "string",
-      "group": 0
+      "uid": "07cc67f4-45d6-494b-adac-09b5cbc7e2b5",
+      "cpu": 4,
+      "ram": 16,
+      "hdd": 100,
+      "status": "started"
     }
   ]
 }
 ```
-Пример публикации постов:
+Пример изменения статуса VPS:
 ```
-POST /api/v1/posts/
+POST /api/vps/{uid}/change_status/
 ```
 
 content type application/json:
 ```
 {
-  "text": "string",
-  "image": "string",
-  "group": 0
+  "status": "stopped"
 }
 ```
 Response:
 ```
 {
-  "id": 0,
-  "author": "string",
-  "text": "string",
-  "pub_date": "2019-08-24T14:15:22Z",
-  "image": "string",
-  "group": 0
+  "uid": "07cc67f4-45d6-494b-adac-09b5cbc7e2b5",
+  "cpu": 4,
+  "ram": 16,
+  "hdd": 100,
+  "status": "stopped"
 }
 ```
-### Enjoy!
 
 ****
-##  Об авторе
-**Автор:** [Артем Фирсов](https://github.com/apfirsov)
-
-**Другие проекты:** [Доступны на GitHub](https://github.com/apfirsov)
+####  Об авторе
+Мой профиль на [GitHub](https://github.com/apfirsov)
